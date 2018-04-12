@@ -2,17 +2,111 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
     <script>
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
+
+        //show geemails
+  		var displayName = document.getElementsByClassName("nameE");
+  		var displaySub = document.getElementsByClassName("subjectE");
+  		var displayDate = document.getElementsByClassName("dateE");
+  		function showGee(){
+  			for(i = 0; i < geemails.length; i++){
+  				displayName[i].innerHTML = geemails[i].sender;
+  				displaySub[i].innerHTML = geemails[i].subject;
+  				displayDate[i].innerHTML = geemails[i].date;
+  			}
+  		}
+  		showGee();
+
+       	//display message content
+  		var showMessage = document.getElementsByClassName("tableRow");
+  		for(i = 0; i < showMessage.length; i++){
+  			showMessage[i].addEventListener("click",printMessage);
+  		}
+  		function printMessage(){
+  			var printElem = document.getElementById("inboxElem");
+  			printElem.innerHTML = getNewMessage().body;
+  		}
+  		
+  		//count message
+  		var countMessage = document.getElementById("inbox");
+    	countMessage.innerHTML += " ( " + geemails.length + " )";
+
+  		//display new message,
+  		//still working on code below: 1. display new message using appendChild to create tr & td instead of hard coded in HTML. 
+  		//2. setInterval to invoke getNewMessage(), store the new message in newMessage[]
+  		//3.count number of element in newMessage[], display the number next by inbox icon
+  		var newMessage=[]; 
+  		function displayNew(){
+  			newMessage.push(messagePop);
+  		}
+  		var messagePop = setInterval(getNewMessage, 3000);
+  		console.log(newMessage);
       };
+      
+      
     </script>
 	</head>
 	<body>
+		<header id="head">Gee-mail</header>
 		<div class="container" id="main">
-			Build Me!
+			<button id="inbox" onClick="window.location.reload()">Inbox</button>
+			<table id="inboxElem">
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+				<tr class="tableRow">
+					<td class="nameE"></td>
+					<td class="subjectE"></td>
+					<td class="dateE"></td>
+				</tr >
+			</table>
 		</div>
 	</body>
 </html>
