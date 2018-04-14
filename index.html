@@ -3,26 +3,43 @@
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
 		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-
+		<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <script>
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
-        //show geemails
-  		var displayName = document.getElementsByClassName("nameE");
-  		var displaySub = document.getElementsByClassName("subjectE");
-  		var displayDate = document.getElementsByClassName("dateE");
-  		function showGee(){
+  		//1. setInterval to invoke getNewMessage(), store the new message in newMessage[]
+  		function loadNewMessage(){
+  			var newMessage = getNewMessage();
+  			window.geemails.push(newMessage);
+  	
+  		}
+  		loadNewMessage();
+  		var pop = setInterval(getNewMessage, 1000);
+  		console.log(geemails.length);
+  		
+  		//create row with rds 
+  		function createTable(){
+  			var table = document.getElementById("inboxElem");
+  			var row = table.insertRow(0);
+  			var cell1 = row.insertCell(0);
+  			var cell2 = row.insertCell(1);
+  			var cell3 = row.insertCell(2);
+  			row.className = "tableRow";
+  			cell1.innerHTML = getNewMessage().sender;
+  			cell2.innerHTML = getNewMessage().subject;
+  			cell3.innerHTML = getNewMessage().date;
+  		}
+  		
+  		function createInbox(){
   			for(i = 0; i < geemails.length; i++){
-  				displayName[i].innerHTML = geemails[i].sender;
-  				displaySub[i].innerHTML = geemails[i].subject;
-  				displayDate[i].innerHTML = geemails[i].date;
+  				createTable();
   			}
   		}
-  		showGee();
+  		createInbox();
 
-       	//display message content
+  		//display message content
   		var showMessage = document.getElementsByClassName("tableRow");
   		for(i = 0; i < showMessage.length; i++){
   			showMessage[i].addEventListener("click",printMessage);
@@ -32,21 +49,15 @@
   			printElem.innerHTML = getNewMessage().body;
   		}
   		
-  		//count message
-  		var countMessage = document.getElementById("inbox");
-    	countMessage.innerHTML += " ( " + geemails.length + " )";
+  		
+  		//display number of inbox 
+  		var num = geemails.length;
+  		var displayNum = document.getElementById("inbox");
+  		displayNum.innerHTML += " ( " + num + " )";
 
-  		//display new message,
-  		//still working on code below: 1. display new message using appendChild to create tr & td instead of hard coded in HTML. 
-  		//2. setInterval to invoke getNewMessage(), store the new message in newMessage[]
-  		//3.count number of element in newMessage[], display the number next by inbox icon
-  		var newMessage=[]; 
-  		function displayNew(){
-  			newMessage.push(messagePop);
-  		}
-  		var messagePop = setInterval(getNewMessage, 3000);
-  		console.log(newMessage);
+  		
       };
+
       
       
     </script>
@@ -54,58 +65,10 @@
 	<body>
 		<header id="head">Gee-mail</header>
 		<div class="container" id="main">
-			<button id="inbox" onClick="window.location.reload()">Inbox</button>
+			<button id="inbox" onClick="window.location.reload()"><i class="fas fa-envelope"></i>
+
+Inbox</button>
 			<table id="inboxElem">
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
-				<tr class="tableRow">
-					<td class="nameE"></td>
-					<td class="subjectE"></td>
-					<td class="dateE"></td>
-				</tr >
 			</table>
 		</div>
 	</body>
