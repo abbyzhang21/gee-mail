@@ -29,20 +29,19 @@ table{
 	border-collapse: collapse;
 	width: 100%;
 }
-td{
-	padding: 15px;
-	border-bottom: 1px solid #CCCC99;
-	text-align: left;
+
+.tableRow p {
+	display: inline-block;
+	width: 33%;
 }
-tr:hover {
+.tableRow{
+	border-bottom: 1px solid #CCCC99;
+}
+.tableRow:hover {
 	background-color: #CCCC99;
 }
-#goback{
-	font-size: 15px;
-
-}
-#goback:hover {
+.bodyE{
+	display: none;
 	background-color: #666633;
-	font-size: 20px;
-	border-radius: 5px;
+	color:  #CCCC99;
 }
