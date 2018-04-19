@@ -9,65 +9,69 @@
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
-  		//1. setInterval to invoke getNewMessage(), store the new message in newMessage[]
+  		//setInterval to invoke loadNewMessage, store the new message in geemails, and display it on inbox
   		function loadNewMessage(){
   			var newMessage = getNewMessage();
-  			window.geemails.push(newMessage);
-  	
+  		  window.geemails.push(newMessage);
+  	    createTable(getNewMessage());
+        document.getElementById("inbox").innerHTML = "Inbox " + "(" + geemails.length + ")";
+        showMessage = document.getElementsByClassName("tableRow");
   		}
-  		loadNewMessage();
-  		var pop = setInterval(getNewMessage, 1000);
-  		console.log(geemails.length);
+  		
   		
   		//create row with rds 
-  		function createTable(){
+  		function createTable(x){
   			var table = document.getElementById("inboxElem");
   			var row = table.insertRow(0);
   			var cell1 = row.insertCell(0);
   			var cell2 = row.insertCell(1);
   			var cell3 = row.insertCell(2);
   			row.className = "tableRow";
-  			cell1.innerHTML = getNewMessage().sender;
-  			cell2.innerHTML = getNewMessage().subject;
-  			cell3.innerHTML = getNewMessage().date;
+  			cell1.innerHTML = x.sender;
+  			cell2.innerHTML = x.subject;
+  			cell3.innerHTML = x.date;
+
   		}
-  		
+      
   		function createInbox(){
   			for(i = 0; i < geemails.length; i++){
-  				createTable();
+  				createTable(geemails[i]);
   			}
   		}
   		createInbox();
 
   		//display message content
   		var showMessage = document.getElementsByClassName("tableRow");
+      var bodyElem = getNewMessage().body;
   		for(i = 0; i < showMessage.length; i++){
   			showMessage[i].addEventListener("click",printMessage);
   		}
   		function printMessage(){
   			var printElem = document.getElementById("inboxElem");
   			printElem.innerHTML = getNewMessage().body;
-  		}
-  		
-  		
-  		//display number of inbox 
-  		var num = geemails.length;
-  		var displayNum = document.getElementById("inbox");
-  		displayNum.innerHTML += " ( " + num + " )";
+        // if (printElem.style.display === "none") {
+        // printElem.style.display = "block";
+        // } else {
+        // printElem.style.display = "none";
+        // }  
+  		}      
 
-  		
+  		var pop = setInterval(loadNewMessage, 20000);
+
       };
-
-      
       
     </script>
 	</head>
 	<body>
 		<header id="head">Gee-mail</header>
 		<div class="container" id="main">
-			<button id="inbox" onClick="window.location.reload()"><i class="fas fa-envelope"></i>
+			<button id="inbox"><i class="fas fa-envelope"></i>
+Inbox (10)</button>
+      <button id="goback" onClick="window.location.reload()"><i class="fas fa-angle-double-left"></i>
 
-Inbox</button>
+
+
+</button>
 			<table id="inboxElem">
 			</table>
 		</div>

@@ -37,4 +37,12 @@ td{
 tr:hover {
 	background-color: #CCCC99;
 }
+#goback{
+	font-size: 15px;
 
+}
+#goback:hover {
+	background-color: #666633;
+	font-size: 20px;
+	border-radius: 5px;
+}
