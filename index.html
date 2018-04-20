@@ -16,6 +16,7 @@
   	    createTable(getNewMessage());
         document.getElementById("inbox").innerHTML = "Inbox " + "(" + geemails.length + ")";
         displayM();
+        hiddenBody();
   		}
   		
   		
@@ -47,14 +48,23 @@
   		}
   		createInbox();
 
+      //hidde body message
+      function hiddenBody() {
+        var bodyMessage = document.querySelectorAll('.bodyE');
+        for(i =0; i<bodyMessage.length; i++){
+        bodyMessage[i].style.display = "none";
+
+        }
+      }
+      hiddenBody();
+
   		//display message content
       function displayM(){
-  		var showMessage = document.getElementsByClassName("tableRow");
-      var bodyElem = getNewMessage().body;
-  		for(i = 0; i < showMessage.length; i++){
+  		  var showMessage = document.getElementsByClassName("tableRow");
+        var bodyElem = getNewMessage().body;
+  		  for(i = 0; i < showMessage.length; i++){
   			showMessage[i].addEventListener("click",printMessage);
   		  }
-      
   		  function printMessage(){
   			 var pElem = this.querySelectorAll('.bodyE')[0];
           if(pElem.style.display === 'none'){
