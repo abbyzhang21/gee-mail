@@ -65,15 +65,15 @@
   		  for(i = 0; i < showMessage.length; i++){
   			showMessage[i].addEventListener("click",printMessage);
   		  }
+      }
   		  function printMessage(){
   			 var pElem = this.querySelectorAll('.bodyE')[0];
           if(pElem.style.display === 'none'){
             pElem.style.display = 'block';
          }else{
-         pElem.style.display = 'none';
+            pElem.style.display = 'none';
          }
-  	   	}   
-      }      
+  	   	}    
       displayM();
       var pop = setInterval(loadNewMessage, 20000);
 
